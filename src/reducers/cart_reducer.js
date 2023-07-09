@@ -8,13 +8,26 @@ import {
 
 const cart_reducer = (state, action) => {
     if (action.type === ADD_TO_CART) {
-        const item = {
-            ...action.payload.product,
-            count: action.payload.count,
-            color: action.payload.activeBtn,
+        const {id, count, activeBtn, product} = action.payload
+
+        const newItem = state.cart.find(
+            (cartItem) => id + activeBtn === cartItem.id + cartItem.color
+        )
+
+        if (newItem) {
+            if (newItem.stock > newItem.count) {
+                newItem.count = newItem.count + 1
+            }
+
+            return {...state}
+        } else {
+            const tempItem = {
+                ...product,
+                count: count,
+                color: activeBtn,
+            }
+            return {...state, cart: [...state.cart, tempItem]}
         }
-        let clone = [...state.cart, item]
-        return {...state, cart: clone}
     }
     if (action.type === CLEAR_CART) {
         return {...state, cart: []}
