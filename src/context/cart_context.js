@@ -9,8 +9,17 @@ import {
 } from "../actions"
 import {useProductsContext} from "./products_context"
 
+const getLocalStorage = () => {
+    let cart = localStorage.getItem("cart")
+    if (cart) {
+        return JSON.parse(localStorage.getItem("cart"))
+    } else {
+        return []
+    }
+}
+
 const initialState = {
-    cart: [],
+    cart: getLocalStorage(),
 }
 
 const CartContext = React.createContext()
@@ -29,6 +38,9 @@ export const CartProvider = ({children}) => {
     const toggleAmount = (id, func) => {
         dispatch({type: TOGGLE_CART_ITEM_AMOUNT, payload: {id, func}})
     }
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(state.cart))
+    }, [state.cart])
     return (
         <CartContext.Provider
             value={{...state, addToCart, clearCart, removeItem, toggleAmount}}>

@@ -11,6 +11,7 @@ import Sidebar from "./Sidebar"
 
 const Nav = () => {
     const {openSidebar} = useProductsContext()
+    const {isAuthenticated} = useUserContext()
     const [width, setWidth] = useState(document.body.clientWidth)
 
     window.addEventListener("resize", () => setWidth(document.body.clientWidth))
@@ -45,6 +46,11 @@ const Nav = () => {
                             <li>
                                 <Link to="/products">Products</Link>
                             </li>
+                            {isAuthenticated && (
+                                <li>
+                                    <Link to="/checkout">Checkout</Link>
+                                </li>
+                            )}
                         </ul>
                         <CartButtons />
                     </>

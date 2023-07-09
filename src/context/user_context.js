@@ -3,7 +3,13 @@ import {useAuth0} from "@auth0/auth0-react"
 
 const UserContext = React.createContext()
 export const UserProvider = ({children}) => {
-    return <UserContext.Provider value="valie">{children}</UserContext.Provider>
+    const {loginWithRedirect, isAuthenticated, logout} = useAuth0()
+    return (
+        <UserContext.Provider
+            value={{loginWithRedirect, isAuthenticated, logout}}>
+            {children}
+        </UserContext.Provider>
+    )
 }
 // make sure use
 export const useUserContext = () => {
