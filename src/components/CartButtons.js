@@ -2,12 +2,11 @@ import React from "react"
 import {FaShoppingCart, FaUserMinus, FaUserPlus} from "react-icons/fa"
 import {Link} from "react-router-dom"
 import styled from "styled-components"
-import {useProductsContext} from "../context/products_context"
 import {useCartContext} from "../context/cart_context"
 import {useUserContext} from "../context/user_context"
 
 const CartButtons = () => {
-    const {cart} = useCartContext()
+    const {cart, clearCart} = useCartContext()
     const {loginWithRedirect, isAuthenticated, logout} = useUserContext()
     let cartItemAmount = 0
     cart.map((item) => (cartItemAmount += item.count))
@@ -32,11 +31,11 @@ const CartButtons = () => {
             ) : (
                 <button
                     className="auth-btn"
-                    onClick={() =>
-                        logout({
-                            logoutParams: {returnTo: window.location.origin},
-                        })
-                    }>
+                    onClick={() => {
+                        clearCart()
+                        localStorage.removeItem("user")
+                        logout({returnTo: window.location.origin})
+                    }}>
                     Log Out
                     <span>
                         <FaUserMinus />

@@ -17,7 +17,8 @@ root.render(
         clientId={process.env.REACT_APP_CLIENT_ID}
         authorizationParams={{
             redirect_uri: window.location.origin,
-        }}>
+        }}
+        cacheLocation="localstorage">
         <UserProvider>
             <ProductsProvider>
                 <FilterProvider>

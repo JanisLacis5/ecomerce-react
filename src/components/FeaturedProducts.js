@@ -2,10 +2,7 @@ import React from "react"
 import {useProductsContext} from "../context/products_context"
 import {Link} from "react-router-dom"
 import styled from "styled-components"
-import Error from "./Error"
-import Loading from "./Loading"
 import Product from "./Product"
-import {loadStripe} from "@stripe/stripe-js"
 
 const FeaturedProducts = () => {
     const {featuredProducts, productsLoading} = useProductsContext()

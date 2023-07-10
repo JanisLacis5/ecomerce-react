@@ -6,21 +6,16 @@ import {formatPrice} from "../utils/helpers"
 import {Link} from "react-router-dom"
 
 const CartTotals = () => {
-    const {cart} = useCartContext()
+    const {total, subtotal, shipping} = useCartContext()
     const {isAuthenticated, loginWithRedirect} = useUserContext()
-    let total = 0
-    let shipping = 534
-    cart.map((item) => {
-        total += item.price * item.count
-    })
-    let orederTotal = total + shipping
+
     return (
         <Wrapper>
             <div>
                 <article>
                     <h5>
                         Subtotal:
-                        <span>${formatPrice(total)}</span>
+                        <span>${formatPrice(subtotal)}</span>
                     </h5>
                     <p>
                         Shipping:
@@ -29,7 +24,7 @@ const CartTotals = () => {
                     <hr />
                     <h4>
                         Order Total:
-                        <span>${formatPrice(orederTotal)}</span>
+                        <span>${formatPrice(total)}</span>
                     </h4>
                 </article>
                 {!isAuthenticated ? (

@@ -20,6 +20,9 @@ const getLocalStorage = () => {
 
 const initialState = {
     cart: getLocalStorage(),
+    shipping: 534,
+    total: 0,
+    subtotal: 0,
 }
 
 const CartContext = React.createContext()
@@ -38,8 +41,12 @@ export const CartProvider = ({children}) => {
     const toggleAmount = (id, func) => {
         dispatch({type: TOGGLE_CART_ITEM_AMOUNT, payload: {id, func}})
     }
+    const countTotals = () => {
+        dispatch({type: COUNT_CART_TOTALS})
+    }
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(state.cart))
+        countTotals()
     }, [state.cart])
     return (
         <CartContext.Provider

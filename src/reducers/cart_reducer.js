@@ -58,6 +58,14 @@ const cart_reducer = (state, action) => {
         })
         return {...state, cart: tempCart}
     }
+    if (action.type === COUNT_CART_TOTALS) {
+        let subtotal = 0
+        state.cart.map((item) => {
+            subtotal += item.price
+        })
+        let total = subtotal + state.shipping
+        return {...state, total: total, subtotal: subtotal}
+    }
     throw new Error(`No Matching "${action.type}" - action type`)
 }
 
