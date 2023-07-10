@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import styled from "styled-components"
 import {loadStripe} from "@stripe/stripe-js"
 import {
-    PaymentElement,
+    CardElement,
     useStripe,
     Elements,
     useElements,
