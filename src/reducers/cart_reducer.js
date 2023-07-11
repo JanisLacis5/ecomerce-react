@@ -18,7 +18,9 @@ const cart_reducer = (state, action) => {
             if (newItem.stock > newItem.count) {
                 newItem.count = newItem.count + 1
             }
-
+            if (!state.cart.length) {
+                return {...state, shipping: 534}
+            }
             return {...state}
         } else {
             const tempItem = {
@@ -26,11 +28,21 @@ const cart_reducer = (state, action) => {
                 count: count,
                 color: activeBtn,
             }
-            return {...state, cart: [...state.cart, tempItem]}
+            if (!state.cart.length) {
+                return {
+                    ...state,
+                    shipping: 534,
+                    cart: [...state.cart, tempItem],
+                }
+            }
+            return {
+                ...state,
+                cart: [...state.cart, tempItem],
+            }
         }
     }
     if (action.type === CLEAR_CART) {
-        return {...state, cart: []}
+        return {...state, cart: [], shipping: 0}
     }
     if (action.type === REMOVE_CART_ITEM) {
         let newArr = state.cart.filter(

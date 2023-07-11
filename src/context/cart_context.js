@@ -20,8 +20,8 @@ const getLocalStorage = () => {
 
 const initialState = {
     cart: getLocalStorage(),
-    shipping: 534,
     total: 0,
+    shipping: 0,
     subtotal: 0,
 }
 

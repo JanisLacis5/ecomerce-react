@@ -8,43 +8,43 @@ import {
     SingleProductPage,
     CartPage,
     CheckoutPage,
+    ErrorPage,
 } from "./pages"
-import {Error} from "./components"
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <HomeLayout />,
-        errorElement: <Error />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
-                errorElement: <Error />,
+                errorElement: <ErrorPage />,
                 element: <HomePage />,
             },
             {
                 path: "about",
-                errorElement: <Error />,
+                errorElement: <ErrorPage />,
                 element: <AboutPage />,
             },
             {
                 path: "products",
-                errorElement: <Error />,
+                errorElement: <ErrorPage />,
                 element: <ProductsPage />,
             },
             {
                 path: "products/:id",
-                errorElement: <Error />,
+                errorElement: <ErrorPage />,
                 element: <SingleProductPage />,
             },
             {
                 path: "cart",
-                errorElement: <Error />,
+                errorElement: <ErrorPage />,
                 element: <CartPage />,
             },
             {
                 path: "checkout",
-                errorElement: <Error />,
+                errorElement: <ErrorPage />,
                 element: <CheckoutPage />,
             },
         ],
